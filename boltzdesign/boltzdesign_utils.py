@@ -535,6 +535,8 @@ def boltz_hallucination(
         if pocket_conditioning:
             options = target.record.inference_options
             binders, pocket = options.binders, options.pocket  
+            print("binders", binders)
+            print("pocket", pocket)
             batch = featurizer.process(
                         tokenized,
                         training=False,
