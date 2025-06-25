@@ -575,6 +575,7 @@ def boltz_hallucination(
     if pre_run:
         batch['res_type_logits'] = batch['res_type'].clone().detach().to(device).float()
         batch['res_type_logits'][batch['entity_id']==chain_to_number[binder_chain],:] = noise_scaling*torch.softmax(torch.distributions.Gumbel(0, 1).sample(batch['res_type'][batch['entity_id']==chain_to_number[binder_chain],:].shape).to(device) - torch.sum(torch.eye(batch['res_type'].shape[-1])[[0,1,6,22,23,24,25,26,27,28,29,30,31,32]],dim=0).to(device)*(1e10), dim=-1)
+        print("res_type_logits", batch['res_type_logits'])  
     else:
         batch['res_type_logits'] = torch.from_numpy(input_res_type).to(device)
 
